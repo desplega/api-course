@@ -2,7 +2,7 @@
     <div class="grid grid-cols-4 gap-4">
         <div class="space-y-2" v-for="product in products.data" :key="product.id">
             <a href="#">
-                <img src="http://placehold.it/300x400" :alt="product.name" />
+                <img src="http://placehold.it/100x100" :alt="product.name" />
             </a>
             <a class="text-slate-500 text-xl font-semibold hover:underline">
                 {{ product.name }}
@@ -13,6 +13,12 @@
     </div>
 
     <TailwindPagination :data="products" @pagination-change-page="getProducts" class="mt-4" />
+
+    <h2>Create category</h2>
+    <div>
+        <input type="text" v-model="name" />
+        <button @click="submit">Submit</button>
+    </div>
 </template>
 
 <script setup>
@@ -42,4 +48,17 @@ onMounted(() => {
     getCategories()
     getProducts()
 })
+
+// Create category form
+
+const name = ref('')
+
+const submit = () => {
+    axios.post('/api/categories', {
+        name: name.value
+    })
+        .then(response => {
+            console.log('New Category ID: ' + response.data.data.id)
+        })
+} 
 </script>
