@@ -9,7 +9,7 @@ use App\Models\Category;
 use App\Http\Resources\CategoryResource;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Str;
-use Symfony\Component\Console\Descriptor\Descriptor;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * @group Categories
@@ -40,7 +40,9 @@ class CategoryController extends Controller
     public function index()
     {
         // abort_if(!auth()->user->tokenCan('categories-list'), 403);
-        return CategoryResource::collection(Category::all());
+        return CategoryResource::collection(Cache::rememberForever('categories', function () {
+            return Category::all();
+        }));
     }
 
     public function show(Category $category)
@@ -57,16 +59,16 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request)
     {
         $data = $request->all();
- 
-        if ($request->hasFile('photo')) { 
+
+        if ($request->hasFile('photo')) {
             $file = $request->file('photo');
             $name = 'categories/' . Str::uuid() . '.' . $file->extension();
             $file->storePubliclyAs('images', $name);
             $data['photo'] = $name;
-        } 
- 
+        }
+
         $category = Category::create($data);
- 
+
         return new CategoryResource($category);
     }
 
