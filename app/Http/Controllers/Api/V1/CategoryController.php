@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
@@ -39,13 +39,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        abort_if(!auth()->user->tokenCan('categories-list'), 403);
+        // abort_if(!auth()->user->tokenCan('categories-list'), 403);
         return CategoryResource::collection(Category::all());
     }
 
     public function show(Category $category)
     {
-        abort_if(!auth()->user->tokenCan('categories-show'), 403);
+        // abort_if(!auth()->user->tokenCan('categories-show'), 403);
         return new CategoryResource($category);
     }
 
