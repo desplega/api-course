@@ -1,0 +1,230 @@
+openapi: 3.0.3
+info:
+  title: Api-Course
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'https://api-course.desplega.com'
+paths:
+  /api/categories:
+    get:
+      summary: 'Get categories'
+      operationId: getCategories
+      description: 'Getting the list of categories'
+      parameters:
+        -
+          in: query
+          name: page
+          description: 'Which page to show.'
+          example: 12
+          required: false
+          schema:
+            type: integer
+            description: 'Which page to show.'
+            example: 12
+        -
+          in: query
+          name: point
+          description: 'Which page to show.'
+          example: '"test"'
+          required: false
+          schema:
+            type: string
+            description: 'Which page to show.'
+            example: '"test"'
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Categories
+      security: []
+    post:
+      summary: 'POST categories'
+      operationId: pOSTCategories
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Categories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Name of the category.'
+                  example: '"Clothing"'
+              required:
+                - name
+      security: []
+  '/api/categories/{id}':
+    get:
+      summary: ''
+      operationId: getApiCategoriesId
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Categories
+      security: []
+    put:
+      summary: ''
+      operationId: putApiCategoriesId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Categories
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: ''
+                  example: quo
+              required:
+                - name
+      security: []
+    delete:
+      summary: ''
+      operationId: deleteApiCategoriesId
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Categories
+      security: []
+    parameters:
+      -
+        in: path
+        name: id
+        description: 'The ID of the category.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+  /api/user:
+    get:
+      summary: ''
+      operationId: getApiUser
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/tokens/create:
+    post:
+      summary: ''
+      operationId: postApiTokensCreate
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/products:
+    get:
+      summary: ''
+      operationId: getApiProducts
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Products
+      security: []
+  '/api/products/{product_id}':
+    get:
+      summary: ''
+      operationId: getApiProductsProduct_id
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Products
+      security: []
+    parameters:
+      -
+        in: path
+        name: product_id
+        description: 'The ID of the product.'
+        example: 1
+        required: true
+        schema:
+          type: integer
+tags:
+  -
+    name: Categories
+    description: "\nManaging Categories"
+  -
+    name: Endpoints
+    description: ''
+  -
+    name: Products
+    description: "\nManaging Products"

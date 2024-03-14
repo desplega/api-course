@@ -9,9 +9,23 @@ use App\Models\Category;
 use App\Http\Resources\CategoryResource;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Str;
+use Symfony\Component\Console\Descriptor\Descriptor;
 
+/**
+ * @group Categories
+ *
+ * Managing Categories
+ */
 class CategoryController extends Controller
 {
+    /**
+     * Get categories
+     * 
+     * Getting the list of categories
+     * 
+     * @queryParam page int Which page to show. Example: 12
+     * @queryParam point string Which page to show. Example: "test"
+     */
     public function index()
     {
         abort_if(!auth()->user->tokenCan('categories-list'), 403);
@@ -24,6 +38,11 @@ class CategoryController extends Controller
         return new CategoryResource($category);
     }
 
+    /**
+     * POST categories
+     * 
+     * @bodyParam name string required Name of the category. Example: "Clothing"
+     */
     public function store(StoreCategoryRequest $request)
     {
         $data = $request->all();
