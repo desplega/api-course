@@ -19,12 +19,23 @@ use Symfony\Component\Console\Descriptor\Descriptor;
 class CategoryController extends Controller
 {
     /**
-     * Get categories
-     * 
-     * Getting the list of categories
-     * 
-     * @queryParam page int Which page to show. Example: 12
-     * @queryParam point string Which page to show. Example: "test"
+     * @OA\Get(
+     *     path="/categories",
+     *     tags={"Categories"},
+     *     summary="Get list of categories",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *     ),
+     *     @OA\Response(
+     *          response=401,
+     *          description="Unauthenticated",
+     *     ),
+     *     @OA\Response(
+     *          response=403,
+     *          description="Forbidden",
+     *     )
+     * )
      */
     public function index()
     {
